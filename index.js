@@ -2,9 +2,11 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const sgMail = require('@sendgrid/mail');
 const restService = express();
+process.env.SENDGRID_API_KEY='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';
 
+var nodemailer = require('nodemailer');
 restService.use(
   bodyParser.urlencoded({
     extended: true
@@ -22,11 +24,43 @@ restService.post("/echo", function(req, res) {
   //     : "Seems like some problem. Speak again.";
   var email = req.body.result &&
               req.body.result.parameters &&req.body.result.parameters.userEmail;
+  var message = req.body.result &&
+              req.body.result.parameters &&req.body.result.parameters.userEmailMessage;
+  var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+        user: 'ranielsanss@gmail.com',
+        pass: 'raniel123ss'
+    }
+  });
 
+  const mailOptions = {
+  from: 'ranielsanss@gmail.com', // sender address
+  to: 'ranielsanss@gmail.com', // list of receivers
+  cc: email,
+  subject: 'Feedback', // Subject line
+  html: message// plain text body
+  
+};
+transporter.sendMail(mailOptions, function (err, info) {
+   if(err)
+     console.log(err)
+   else
+     console.log(info);
+});
 
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// const msg = {
+//   to: 'santiagoraniel14@gmail.com',
+//   from: 'josephsantiago199609@gmail.com',
+//   subject: 'Test Change Again',
+
+//   text: 'and easy to do anywhere, even with Node.js',
+//   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+// };
+// sgMail.send(msg);
 
   return res.json({
-    speech: email,
     displayText: "Thanks for sending us feedback",
   });
 });
