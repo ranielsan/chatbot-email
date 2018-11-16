@@ -13,7 +13,7 @@ restService.use(
 
 restService.use(bodyParser.json());
 
-restService.post("/email", function(req, res) {
+restService.post("/echo", function(req, res) {
   // var speech =
   //   req.body.result &&
   //   req.body.result.parameters &&
@@ -25,7 +25,9 @@ restService.post("/email", function(req, res) {
 
 
   return res.json({
-    displayText: "Thank for sending us feedback"
+    speech: speech,
+    displayText: speech,
+    source: "webhook-echo-sample"
   });
 });
 
