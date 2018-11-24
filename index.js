@@ -35,7 +35,7 @@ restService.post("/echo", function(req, res) {
   });
 
   const mailOptions = {
-  from: 'Chatbot Feedback', // sender address
+  from: 'Chatbot feedback', // sender address
   to: 'ranielsanss@gmail.com', // list of receivers
   cc: email,
   subject: 'Feedback', // Subject line
