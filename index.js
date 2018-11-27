@@ -29,8 +29,8 @@ restService.post("/echo", function(req, res) {
   var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-        user: 'ranielsanss@gmail.com',
-        pass: 'raniel123ss'
+        user: 'asdasd@gmail.com',
+        pass: 'asdsd'
     }
   });
 
